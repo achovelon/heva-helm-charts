@@ -43,13 +43,14 @@ spec:
               value: "{{- tpl .Values.connections.database.host . }}"
             - name: DATABASE_DB
               value: "{{- .Values.connections.database.database }}"
-            - name: DATABASE_USER
-              value: "{{- .Values.connections.database.username }}"
-            - name: DATABASE_PASSWORD
-              value: "{{- .Values.connections.database.password }}"
             {{- if .Values.extraEnvVars }}
             {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}
+          {{- if .Values.envFromSecret }}
+          envFrom:
+            - secretRef:
+                name: {{ tpl .Values.envFromSecret . | quote }}
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

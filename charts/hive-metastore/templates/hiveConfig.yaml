@@ -34,11 +34,11 @@ data:
         </property>
         <property>
           <name>javax.jdo.option.ConnectionUserName</name>
-          <value>{{- .Values.connections.database.username }}</value>
+          <value>${username}</value>
         </property>
         <property>
           <name>javax.jdo.option.ConnectionPassword</name>
-          <value>{{- .Values.connections.database.password }}</value>
+          <value>${password}</value>
         </property>
         <property>
           <name>datanucleus.autoCreateSchema</name>
@@ -87,12 +87,12 @@ data:
 
         <property>
             <name>fs.s3a.access.key</name>
-            <value>{{- .Values.objectStore.accessKeyId }}</value>
+            <value>${minio-accesskey}</value>
         </property>
 
         <property>
             <name>fs.s3a.secret.key</name>
-            <value>{{- .Values.objectStore.secretAccessKey }}</value>
+            <value>${minio-secretkey}</value>
         </property>
 
         <property>

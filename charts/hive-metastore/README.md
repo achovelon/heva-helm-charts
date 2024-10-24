@@ -117,8 +117,6 @@ There are two options to do this:
 
 | Name                            | Description                                                  | Value                                    |
 | ------------------------------- | ------------------------------------------------------------ | ---------------------------------------- |
-| `connections.database.username` | Database username                                            | `hive`                                   |
-| `connections.database.password` | Database password                                            | `hive`                                   |
 | `connections.database.database` | Hive database name                                           | `metastore`                              |
 | `connections.database.host`     | Databas host                                                 | `{{ .Release.Name }}-postgresql`         |
 | `connections.database.port`     | Database port                                                | `5432`                                   |
