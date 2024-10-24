@@ -125,10 +125,6 @@ extraVolumes: []
 # Define hive connections to other services
 connections:
   database:
-    ## @param connections.database.username [default: hive] Database username
-    username: hive
-    ## @param connections.database.password [default: hive] Database password
-    password: hive
     ## @param connections.database.database [default: metastore] Hive database name
     database: metastore
     ## @param connections.database.host Databas host
@@ -229,3 +225,8 @@ postgresql:
     service:
       ports:
         postgresql: "5432"
+
+initdb:
+  enabled: true
+
+envFromSecret: 'back-api-environment'
