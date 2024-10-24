@@ -228,5 +228,3 @@ postgresql:
 
 initdb:
   enabled: true
-
-envFromSecret: 'back-api-environment'
