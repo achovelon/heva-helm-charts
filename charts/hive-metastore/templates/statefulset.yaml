@@ -35,7 +35,12 @@ spec:
           command:
             - "/bin/sh"
             - "-c"
-            - "hive --service metastore"
+            - |
+              sed -i "s|\${username}|${username}|g" /opt/hive/conf/hive-site.xml && \
+              sed -i "s|\${password}|${password}|g" /opt/hive/conf/hive-site.xml && \
+              sed -i "s|\${minio-accesskey}|${minio-accesskey}|g" /opt/hive/conf/hive-site.xml && \
+              sed -i "s|\${minio-secretkey}|${minio-secretkey}|g" /opt/hive/conf/hive-site.xml && \
+              hive --service metastore
           env:
             - name: SERVICE_NAME
               value: metastore
