@@ -123,8 +123,6 @@ There are two options to do this:
 | `conf.hiveSite`                 | Set of hive-site.xml configuration                           | `{}`                                     |
 | `objectStore.sslEnabled`        | Value of fs.s3a.connection.ssl.enabled in hive-site.xml file | `false`                                  |
 | `objectStore.endpoint`          | Value of fs.s3a.endpoint in hive-site.xml file               | `nil`                                    |
-| `objectStore.accessKeyId`       | Value of fs.s3a.access.key in hive-site.xml file             | `nil`                                    |
-| `objectStore.secretAccessKey`   | Value of fs.s3a.secret.key in hive-site.xml file             | `nil`                                    |
 | `objectStore.pathStyle`         | Value of fs.s3a.path.style.access in hive-site.xml file      | `true`                                   |
 | `objectStore.impl`              | Value of fs.s3a.impl in hive-site.xml file                   | `org.apache.hadoop.fs.s3a.S3AFileSystem` |
 | `log.level.meta`                | Log level of logger.meta in log4j properties                 | `debug`                                  |
