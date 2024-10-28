@@ -43,8 +43,9 @@ spec:
               value: "{{- tpl .Values.connections.database.host . }}"
             - name: DATABASE_DB
               value: "{{- .Values.connections.database.database }}"
-            {{- if .Values.extraEnvVars }}
-            {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
+            {{- range .Values.extraEnvVars }}
+            - name: {{ .name }}
+              value: "{{ .value }}"
             {{- end }}
           {{- if .Values.envFromSecret }}
           envFrom:
