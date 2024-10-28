@@ -32,15 +32,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command:
-            - "/bin/sh"
-            - "-c"
-            - | 
-              hive --service metastore \
-                -Djavax.jdo.option.ConnectionUserName=${username} \
-                -Djavax.jdo.option.ConnectionPassword=${password} \
-                -Dfs.s3a.access.key=${minio-accesskey} \
-                -Dfs.s3a.secret.key=${minio-secretkey}
+          command: {{ tpl (toJson .Values.command) . }}
           env:
             - name: SERVICE_NAME
               value: metastore
