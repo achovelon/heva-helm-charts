@@ -32,11 +32,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command:
-            - "/bin/sh"
-            - "-c"
-            - |
-              {{ tpl .Values.command . | default "hive --service metastore" }}
+          command: {{ tpl (toJson .Values.command) . }}
           env:
             - name: SERVICE_NAME
               value: metastore
