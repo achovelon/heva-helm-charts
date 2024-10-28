@@ -222,3 +222,5 @@ postgresql:
 
 initdb:
   enabled: true
+
+commande: "hive --service metastore"
