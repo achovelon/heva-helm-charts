@@ -3,7 +3,6 @@ kind: ConfigMap
 metadata:
   name: {{ include "hive-metastore.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "hive-metastore.name" . }}
     {{- include "hive-metastore.labels" . | nindent 4 }}
 data:
   hive-site.xml: |
@@ -35,7 +34,11 @@ data:
         </property>
         <property>
           <name>javax.jdo.option.ConnectionUserName</name>
-          <value>{{- .Values.connections.database.username }}</value>
+          <value>${username}</value>
+        </property>
+        <property>
+          <name>javax.jdo.option.ConnectionPassword</name>
+          <value>${password}</value>
         </property>
         <property>
           <name>datanucleus.autoCreateSchema</name>
@@ -87,14 +90,14 @@ data:
         {{- if .Values.objectStore.accessKeyId }}
         <property>
             <name>fs.s3a.access.key</name>
-            <value>{{- .Values.objectStore.accessKeyId }}</value>
+            <value>${minio-accesskey}</value>
         </property>
         {{- end }}
 
         {{- if .Values.objectStore.secretAccessKey }}
         <property>
             <name>fs.s3a.secret.key</name>
-            <value>{{- .Values.objectStore.secretAccessKey }}</value>
+            <value>${minio-secretkey}</value>
         </property>
         {{- end }}
 

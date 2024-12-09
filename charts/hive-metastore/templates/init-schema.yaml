@@ -15,9 +15,9 @@ spec:
            --verbose
            -initSchema
            -ifNotExists
-           -dbType postgres
-           -userName "{{- .Values.connections.database.username }}"
-           -passWord "$DATABASE_PASSWORD"
+           -dbtype postgres
+           -username ${username}
+           -password ${password}
            -url "jdbc:postgresql://{{- tpl .Values.connections.database.host . }}:{{- .Values.connections.database.port }}/{{- .Values.connections.database.database }}"
         volumeMounts:
         - name: hive-config

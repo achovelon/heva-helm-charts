@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ include "hive-metastore.fullname" . }}
-  labels:
-    {{- include "hive-metastore.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
@@ -34,10 +32,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command:
-            - "/bin/sh"
-            - "-c"
-            - "hive --service metastore"
+          command: {{ tpl (toJson .Values.command) . }}
           env:
             - name: SERVICE_NAME
               value: metastore
@@ -45,21 +40,14 @@ spec:
               value: "{{- tpl .Values.connections.database.host . }}"
             - name: DATABASE_DB
               value: "{{- .Values.connections.database.database }}"
-            - name: DATABASE_USER
-              value: "{{- .Values.connections.database.username }}"
-            {{- if .Values.connections.database.password }}
-            - name: DATABASE_PASSWORD
-              value: "{{- .Values.connections.database.password }}"
+            {{- range .Values.extraEnvVars }}
+            - name: {{ .name }}
+              value: "{{ .value }}"
             {{- end }}
-            {{- if .Values.extraEnvVars }}
-            {{- .Values.extraEnvVars | nindent 12 }}
-            {{- end }}
-          {{- if .Values.extraEnvVarsSecret }}
+          {{- if .Values.envFromSecret }}
           envFrom:
-            {{- if .Values.extraEnvVarsSecret }}
             - secretRef:
-                name: "{{- .Values.extraEnvVarsSecret  }}"
-            {{- end }}
+                name: {{ tpl .Values.envFromSecret . | quote }}
           {{- end }}
           ports:
             - name: http
