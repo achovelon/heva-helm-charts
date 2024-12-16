@@ -11,13 +11,13 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           command: ["/bin/sh", "-c"]
           args:
-            - schematool
+            - schemaTool
              --verbose
              -initSchema
              -ifNotExists
-             -dbtype postgres
-             -username ${username}
-             -password ${password}
+             -dbType postgres
+             -userName ${username}
+             -passWord ${password}
              -url "jdbc:postgresql://{{- tpl .Values.connections.database.host . }}:{{- .Values.connections.database.port }}/{{- .Values.connections.database.database }}"
           volumeMounts:
             - name: hive-config
