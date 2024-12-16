@@ -11,7 +11,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           command: ["/bin/sh", "-c"]
           args:
-            - schemaTool
+            - schematool
              --verbose
              -initSchema
              -ifNotExists
