@@ -220,9 +220,8 @@ postgresql:
       ports:
         postgresql: "5432"
 
-initdb:
-  enabled: true
-
+## Hive command
+## @section Hive command
 command:
   - "/bin/sh"
   - "-c"
