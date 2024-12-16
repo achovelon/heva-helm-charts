@@ -12,20 +12,20 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - schematool
-            --verbose
-            -initSchema
-            -ifNotExists
-            -dbtype postgres
-            -username ${username}
-            -password ${password}
-            -url "jdbc:postgresql://{{- tpl .Values.connections.database.host . }}:{{- .Values.connections.database.port }}/{{- .Values.connections.database.database }}"
-        volumeMounts:
-          - name: hive-config
-            mountPath: /opt/hive-metastore/conf
-        env:
-          {{- if .Values.extraEnvVars }}
-          {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
-          {{- end }}
+             --verbose
+             -initSchema
+             -ifNotExists
+             -dbtype postgres
+             -username ${username}
+             -password ${password}
+             -url "jdbc:postgresql://{{- tpl .Values.connections.database.host . }}:{{- .Values.connections.database.port }}/{{- .Values.connections.database.database }}"
+          volumeMounts:
+            - name: hive-config
+              mountPath: /opt/hive-metastore/conf
+          env:
+            {{- if .Values.extraEnvVars }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
+            {{- end }}
       volumes:
         - name: hive-config
           configMap:
