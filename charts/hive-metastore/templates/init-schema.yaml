@@ -13,12 +13,12 @@ spec:
           args:
             - |
               echo "Checking if schema exists...";
-              if schematool --verbose -info -dbType postgres -userName ${username} -passWord ${password} -url "jdbc:postgresql://{{ tpl .Values.connections.database.host . }}:{{ tpl .Values.connections.database.port }}/{{ tpl .Values.connections.database.database . }}" > /dev/null 2>&1; then
+              if schematool --verbose -info -dbType postgres -userName ${username} -passWord ${password} -url "jdbc:postgresql://{{ tpl .Values.connections.database.host . }}:{{ tpl .Values.connections.database.port . }}/{{ tpl .Values.connections.database.database . }}" > /dev/null 2>&1; then
                 echo "Schema exists, running -upgradeSchema...";
-                schematool --verbose -upgradeSchema -dbType postgres -userName ${username} -passWord ${password} -url "jdbc:postgresql://{{ tpl .Values.connections.database.host . }}:{{ tpl .Values.connections.database.port }}/{{ tpl .Values.connections.database.database . }}"
+                schematool --verbose -upgradeSchema -dbType postgres -userName ${username} -passWord ${password} -url "jdbc:postgresql://{{ tpl .Values.connections.database.host . }}:{{ tpl .Values.connections.database.port . }}/{{ tpl .Values.connections.database.database . }}"
               else
                 echo "Schema does not exist, running -initSchema...";
-                schematool --verbose -initSchema -ifNotExists -dbType postgres -userName ${username} -passWord ${password} -url "jdbc:postgresql://{{ tpl .Values.connections.database.host . }}:{{ tpl .Values.connections.database.port }}/{{ tpl .Values.connections.database.database . }}"
+                schematool --verbose -initSchema -ifNotExists -dbType postgres -userName ${username} -passWord ${password} -url "jdbc:postgresql://{{ tpl .Values.connections.database.host . }}:{{ tpl .Values.connections.database.port . }}/{{ tpl .Values.connections.database.database . }}"
               fi
           volumeMounts:
             - name: hive-config
