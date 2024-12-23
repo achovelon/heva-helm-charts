@@ -130,7 +130,7 @@ connections:
     ## @param connections.database.host Databas host
     host: "{{ .Release.Name }}-postgresql"
     ## @param connections.database.port [default: 5432] Database port
-    port: 5432
+    port: "5432"
 
 # Update hive-site.xml file
 conf:
